@@ -1,0 +1,36 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compile and run Go program",
+            "type": "shell",
+            "command": "/bin/bash",
+            "args": [
+                "-c",
+                "go build ${relativeFile} && gtimeout 10 gtime -v --output sys.txt ./${fileBasenameNoExtension} < input.txt > output.txt && rm ${fileBasenameNoExtension}"
+            ],
+            "presentation": {
+                "reveal": "silent"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": {
+                "owner": "go",
+                "fileLocation": [
+                    "relative",
+                    "${workspaceRoot}"
+                ],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            }
+        }
+    ]
+}
